@@ -2,5 +2,8 @@
     font-family: 'Roboto';
 }
 h1 {
-    color: blueviolet;
+    color: rgb(226, 70, 43);
+}
+.navbar img {
+    width: 50px;
 }

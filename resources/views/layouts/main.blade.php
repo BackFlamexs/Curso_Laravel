@@ -1,82 +1,54 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title')</title>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/footer.css">
-    <link rel="stylesheet" href="/css/navbar.css">
+        <title>@yield('title')</title>
 
-    <script src="/js/script.js"></script>
-</head>
-<body>
-    <header>
-        <nav class="barra-navegacao">
-            <div class="secao-logo">
-                <img src="/images/logo.gif" alt="Logo Flamexs">
-            </div>
-            
-            <div class="links-navegacao">
-                <a href="/">Início</a>
-                <a href="/produtos">Produtos</a>
-                <a href="/sobre">Sobre nós</a>
-                <a href="#faq">FAQ</a>
-                <a href="/troca">Trocas e Devoluções</a>
-                <a href="/contato">Contato</a>
-            </div>
-            
-            <div class="secao-usuario">
-                <a href="/login"><img src="/images/user.svg" alt="Usuário"></a>
-                <a href="#" id="icone-carrinho" style="position: relative;">
-                    <img src="/images/carrinho.svg" alt="Carrinho">
-                    <span class="contador-carrinho" id="contador-carrinho">0</span>
-                </a>
-            </div>
+        <!-- Fonte do Google -->
+        <link href="https://fonts.googleapis.com/css2?family=Roboto" rel="stylesheet">
 
-            <button id="botao-menu-mobile" class="botao-menu-mobile">
-                <span class="linha-menu"></span>
-                <span class="linha-menu"></span>
-                <span class="linha-menu"></span>
-            </button>
+        <!-- CSS Bootstrap -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+        <!-- CSS da aplicação -->
+        <link rel="stylesheet" href="/css/style.css">
+        <script src="/js/scripts.js"></script>
+    </head>
+    <body>
+      <header>
+        <nav class="navbar navbar-expand-lg navbar-light">
+          <div class="collapse navbar-collapse" id="navbar">
+            <a href="/" class="navbar-brand">
+              <img src="/img/hdcevents_logo.svg" alt="HDC Events">
+            </a>
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a href="/" class="nav-link">Eventos</a>
+              </li>
+              <li class="nav-item">
+                <a href="/events/create" class="nav-link">Criar Eventos</a>
+              </li>
+              <li class="nav-item">
+                <a href="/" class="nav-link">Entrar</a>
+              </li>
+              <li class="nav-item">
+                <a href="/" class="nav-link">Cadastrar</a>
+              </li>
+              <li class="nav-item">
+                <a href="/events/contact" class="nav-link">Contatos</a>
+              </li>
+              <li class="nav-item">
+                <a href="/events/product" class="nav-link">Produtos</a>
+              </li>
+            </ul>
+          </div>
         </nav>
-
-        <div id="menu-mobile" class="menu-mobile">
-            <div class="menu-mobile-conteudo">
-                <a href="/">Início</a>
-                <a href="/produtos">Produtos</a>
-                <a href="/sobre">Sobre nós</a>
-                <a href="#faq">FAQ</a>
-                <a href="/troca">Trocas e Devoluções</a>
-                <a href="/contato">Contato</a>
-            </div>
-        </div>
-    </header>
-
-    <main>
-        <div class="container-fluid">
-            @yield('content')
-            <!-- Aqui ira ficar todo o conteudo da pagina que nao foi puxado da main -->
-        </div>
-    </main>
-
-
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-content">
-                {{-- O restante do seu código do footer entra aqui --}}
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2024 Flamexs. Todos os direitos reservados.</p>
-                {{-- O restante do seu código do footer-bottom entra aqui --}}
-            </div>
-        </div>
-    </footer>
-
-</body>
+      </header>
+      @yield('content')
+      <footer>
+        <p>HDC Events &copy; 2025</p>
+      </footer>
+    </body>
 </html>
