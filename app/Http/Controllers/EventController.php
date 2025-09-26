@@ -76,13 +76,26 @@ class EventController extends Controller
 
         $event = Event::findOrFail($id);
 
+        $user = auth()->user();
+        $hasUserJoined = false;
+
+        if($user) {
+            $userEvents = $user->eventsAsParticipant->ToArray();
+
+            foreach($userEvents as $userEvent) {
+                if($userEvent['id'] == $id) {
+                    $hasUserJoined = true;
+                }
+            }
+        }
+
         $eventOwner = $event->user;
 
         if (!$eventOwner) {
             return redirect('/')->with('error', 'Evento não possui proprietário válido!');
         }
 
-        return view('events.show', ['event' => $event, 'eventOwner' => $eventOwner]);
+        return view('events.show', ['event' => $event, 'eventOwner' => $eventOwner, 'hasUserJoined' => $hasUserJoined]);
     }
 
     public function dashboard()
@@ -153,5 +166,18 @@ class EventController extends Controller
         $event = Event::findOrFail($id);
 
         return redirect('/dashboard')->with('msg', 'Sua presenca esta confirmada no evento'. $event->title);
+    }
+
+    public function leaveEvent($id) {
+        
+        $user = auth()->user();
+
+        $user->eventsAsParticipant()->detach($id);
+
+        $event = Event::findOrFail($id);
+
+        return redirect('/dashboard')->with('msg', 'Sua presenca esta cancelada desse evento'. $event->title);
+
+
     }
 }
