@@ -61,7 +61,7 @@ class EventController extends Controller
         $user = auth()->user();
         
         if (!$user) {
-            return redirect('/login')->with('msg', 'Você precisa estar logado para criar um evento!');
+            return redirect('/login')->with('error', 'Você precisa estar logado para criar um evento!');
         }
         
         $event->user_id = $user->id;
@@ -75,11 +75,29 @@ class EventController extends Controller
     public function show($id) {
 
         $event = Event::findOrFail($id);
-
-        $eventOwner = User::where('id', $event->user_id)->first()->ToArray();
+        
+        $eventOwner = $event->user;
+        
+        if (!$eventOwner) {
+            return redirect('/')->with('error', 'Evento não possui proprietário válido!');
+        }
 
         return view('events.show', ['event' => $event, 'eventOwner' => $eventOwner]);
         
+    }
+
+    public function dashboard() {
+
+        $user = auth()->user();
+        
+        if (!$user) {
+            return redirect('/login')->with('error', 'Você precisa estar logado para acessar o dashboard!');
+        }
+
+        $events = $user->events;
+
+        return view('events.dashboard', ['events' => $events]);
+
     }
 
 }
