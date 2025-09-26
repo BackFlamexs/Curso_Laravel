@@ -57,6 +57,14 @@ class EventController extends Controller
 
         }
 
+        $user = auth()->user();
+        
+        if (!$user) {
+            return redirect('/login')->with('msg', 'Você precisa estar logado para criar um evento!');
+        }
+        
+        $event->user_id = $user->id;
+
         $event->save();
 
         return redirect('/')->with('msg', 'Evento criado com sucesso!');

@@ -43,12 +43,12 @@
                             <a href="/dashboard" class="nav-link">Meus eventos</a>
                         </li>
                         <li class="nav-item">
-                           <form action="/logout" method="POST">
-                            @csrf
-                            <a href="/logout" class="nav-link"
-                            onclick="event.preventDefault();
+                            <form action="/logout" method="POST">
+                                @csrf
+                                <a href="/logout" class="nav-link"
+                                    onclick="event.preventDefault();
                             this.closest('form').submit();">Sair</a>
-                           </form>
+                            </form>
                         </li>
                     @endauth
                     @guest
